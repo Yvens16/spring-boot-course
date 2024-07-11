@@ -1,3 +1,0 @@
-2024-07-11 15:09:14.237375+02:00 jdbc[3]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "TASKS" not found (this database is empty); SQL statement:
-insert into tasks (name,id) values (?,default) [42104-224]
