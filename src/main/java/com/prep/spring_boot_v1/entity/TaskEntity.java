@@ -1,4 +1,4 @@
-package com.prep.spring_boot_v1;
+package com.prep.spring_boot_v1.entity;
 
 import jakarta.persistence.*;
 
@@ -10,10 +10,10 @@ public class TaskEntity {
     private String name;
 
     // Usefull for JPA to instantiate and use the entity class
-    TaskEntity(){}
+    public TaskEntity(){}
     // Usefull for use to instantiate and create an object TaskEntity with a name
     // TaskEntity task = new TaskEntity("Example Task");
-    TaskEntity(String name) {
+    public TaskEntity(String name) {
         this.name = name;
     }
 

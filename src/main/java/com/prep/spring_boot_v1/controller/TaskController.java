@@ -1,28 +1,21 @@
-package com.prep.spring_boot_v1;
+package com.prep.spring_boot_v1.controller;
 
+import com.prep.spring_boot_v1.entity.TaskEntity;
+import com.prep.spring_boot_v1.mapper.Mapper;
+import com.prep.spring_boot_v1.repository.TaskRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-public class Endpoint {
+public class TaskController {
+
     private final TaskRepository taskRepository;
-
-    Endpoint(TaskRepository taskRepository) {
+    private final Mapper mapper;
+    TaskController(TaskRepository taskRepository, Mapper mapper) {
         this.taskRepository = taskRepository;
-    }
-
-    @GetMapping("/")
-    String getText() {
-        return "Hello";
-    }
-
-    // Navigators can only do get request
-    // Instead do this to test: curl -X POST http://localhost:8080/test/hello
-    @PostMapping("/test/{id}")
-    void showText(@PathVariable String id) {
-        System.out.println("@@@@@@" + " " + id);
+        this.mapper = mapper;
     }
 
     // For an Endpoint with Requestparam curl -X POST 'http://localhost:8080/test?name=yvens'
@@ -80,5 +73,4 @@ public class Endpoint {
         this.taskRepository.delete(optionalTask.get());
         return "Task " + optionalTask.get().getName() + " deleted";
     }
-
 }
