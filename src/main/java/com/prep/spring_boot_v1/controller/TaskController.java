@@ -3,6 +3,7 @@ package com.prep.spring_boot_v1.controller;
 import com.prep.spring_boot_v1.entity.TaskEntity;
 import com.prep.spring_boot_v1.mapper.Mapper;
 import com.prep.spring_boot_v1.repository.TaskRepository;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -34,7 +35,7 @@ public class TaskController {
         return newTask;
     }
 
-    // curl -X GET 'http://localhost:8080/getall'
+    // curl -X GET 'http://localhost:8080/get-all'
     @GetMapping("getall")
     List<TaskEntity> getAll() {
         return this.taskRepository.findAll();
@@ -49,8 +50,8 @@ public class TaskController {
         }
         return optionalTask;
     }
-
-    // curl -X PUT 'http://localhost:8080/update?id=1&newName=yvens'
+//curl -X PUT 'http://localhost:8080/update?id=0&name=updatedTask'
+    // curl -X PUT 'http://localhost:8080/update?id=1&name=yvens'
     @PutMapping("update")
     TaskEntity update(@RequestParam Long id, @RequestParam String newName) {
         Optional<TaskEntity> optionalTask = this.taskRepository.findById(id);
@@ -63,7 +64,7 @@ public class TaskController {
         return savedTask;
     }
 
-    // curl -X DELETE 'http://localhost:8080/delete?id=1'
+    // curl -X DELETE 'http://localhost:8080/delete?id=9'
     @DeleteMapping("delete")
     String delete(@RequestParam Long id) {
         Optional<TaskEntity> optionalTask = this.taskRepository.findById(id);
@@ -74,3 +75,8 @@ public class TaskController {
         return "Task " + optionalTask.get().getName() + " deleted";
     }
 }
+
+
+
+
+
