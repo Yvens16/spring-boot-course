@@ -43,7 +43,7 @@ public class TaskController {
 
     // curl -X GET 'http://localhost:8080/get-by-id?id=1'
     @GetMapping("get-by-id")
-    Optional<TaskEntity> getOne(@RequestParam Long id) {
+    Optional<TaskEntity> getOne(@RequestParam String id) {
         Optional<TaskEntity> optionalTask = this.taskRepository.findById(id);
         if (!optionalTask.isPresent()) {
             throw new IllegalStateException("Task does not exist");
@@ -53,7 +53,7 @@ public class TaskController {
 //curl -X PUT 'http://localhost:8080/update?id=0&name=updatedTask'
     // curl -X PUT 'http://localhost:8080/update?id=1&name=yvens'
     @PutMapping("update")
-    TaskEntity update(@RequestParam Long id, @RequestParam String newName) {
+    TaskEntity update(@RequestParam String id, @RequestParam String newName) {
         Optional<TaskEntity> optionalTask = this.taskRepository.findById(id);
         if (!optionalTask.isPresent()) {
             throw new IllegalStateException("Task does not exist");
@@ -66,7 +66,7 @@ public class TaskController {
 
     // curl -X DELETE 'http://localhost:8080/delete?id=9'
     @DeleteMapping("delete")
-    String delete(@RequestParam Long id) {
+    String delete(@RequestParam String id) {
         Optional<TaskEntity> optionalTask = this.taskRepository.findById(id);
         if (!optionalTask.isPresent()) {
             throw new IllegalStateException("Task does not exist");
