@@ -9,7 +9,7 @@ public class Mapper {
 
     public TaskDTO toDto(TaskEntity task) {
         String name = task.getName();
-        TaskDTO taskDTO = new TaskDTO();
+        TaskDTO taskDTO = new TaskDTO("name");
         taskDTO.setName(name);
         return taskDTO;
     }

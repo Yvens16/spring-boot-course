@@ -1,5 +1,6 @@
 package com.prep.spring_boot_v1.controller;
 
+import com.prep.spring_boot_v1.dto.TaskDTO;
 import com.prep.spring_boot_v1.entity.TaskEntity;
 import com.prep.spring_boot_v1.mapper.Mapper;
 import com.prep.spring_boot_v1.repository.TaskRepository;
@@ -8,18 +9,22 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 public class TaskController {
 
     private final TaskRepository taskRepository;
     private final Mapper mapper;
+
     TaskController(TaskRepository taskRepository, Mapper mapper) {
         this.taskRepository = taskRepository;
         this.mapper = mapper;
     }
 
-    // For an Endpoint with Requestparam curl -X POST 'http://localhost:8080/test?name=yvens'
+    // For an Endpoint with Requestparam curl -X POST
+    // 'http://localhost:8080/test?name=yvens'
     @PostMapping("/test")
     void show(@RequestParam String name) {
         TaskEntity task = new TaskEntity(name);
@@ -50,7 +55,8 @@ public class TaskController {
         }
         return optionalTask;
     }
-//curl -X PUT 'http://localhost:8080/update?id=0&name=updatedTask'
+
+    // curl -X PUT 'http://localhost:8080/update?id=0&name=updatedTask'
     // curl -X PUT 'http://localhost:8080/update?id=1&name=yvens'
     @PutMapping("update")
     TaskEntity update(@RequestParam Long id, @RequestParam String newName) {
@@ -74,9 +80,12 @@ public class TaskController {
         this.taskRepository.delete(optionalTask.get());
         return "Task " + optionalTask.get().getName() + " deleted";
     }
+
+    @PostMapping("/create-object")
+    TaskEntity postMethodName(@RequestBody TaskDTO taskDto) {
+        // T-1874 process POST request
+        TaskEntity newTask = new TaskEntity(taskDto.getName());
+        return this.taskRepository.save(newTask);
+    }
+
 }
-
-
-
-
-

@@ -4,6 +4,12 @@ public class TaskDTO {
 
     private String name;
 
+    public TaskDTO() {}
+    
+    public TaskDTO(String name) {
+        this.name = name;
+    }
+
     public String getName() {
         return name;
     }
